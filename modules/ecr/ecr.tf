@@ -5,7 +5,7 @@ resource "aws_ecr_repository" "demo_app_ecr_repo" {
   image_scanning_configuration {
     scan_on_push = true
   }
-    tags = {
+  tags = {
     Name        = "tashdid-demo-app-ecr-repo"
     Environment = "test"
   }

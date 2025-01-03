@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacts</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+    <h1>Contact List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Cell</th>
+            </tr>
+        </thead>
+        <tbody id="contact-list">
+            <!-- Contacts will be populated here by JavaScript -->
+        </tbody>
+    </table>
+    <script>
+        fetch('/contacts')
+            .then(response => response.json())
+            .then(data => {
+                const contactList = document.getElementById('contact-list');
+                data.forEach(contact => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${contact.name}</td>
+                        <td>${contact.email}</td>
+                        <td>${contact.cell}</td>
+                    `;
+                    contactList.appendChild(row);
+                });
+            });
+    </script>
+</body>
+</html>

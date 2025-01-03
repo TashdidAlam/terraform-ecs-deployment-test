@@ -9,27 +9,37 @@ app.use(function(req, res, next) {
 
 // Hard-Coded for demo
 const CONTACTS = [
-                    {
-                      "name": "Foo Bar",
-                      "email": "foobar@test.com",
-                      "cell": "555-123-4567"
-                    },
-                    {
-                      "name": "Biz Baz",
-                      "email": "bizbaz@test.com",
-                      "cell": "555-123-5678"
-                    },
-                    {
-                      "name": "Bing Bang",
-                      "email": "bingbang@test.com",
-                      "cell": "555-123-6789"
-                    }
-                ];
+    {
+        "name": "Foo Bar",
+        "email": "foobar@test.com",
+        "cell": "555-123-4567"
+    },
+    {
+        "name": "Biz Baz",
+        "email": "bizbaz@test.com",
+        "cell": "555-123-5678"
+    },
+    {
+        "name": "Bing Bang",
+        "email": "bingbang@test.com",
+        "cell": "555-123-6789"
+    }
+];
 
+// Serve static files from the 'public' directory
+app.use(express.static('public'));
+
+// Endpoint to get contacts
 app.get('/contacts', (req, res) => {
-  res.json({contacts: CONTACTS});
+    res.json(CONTACTS);
 });
 
-app.listen(3000, () =>{
-   console.log('Server running on port 3000.'); 
+// Serve the HTML page
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/index.html');
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
